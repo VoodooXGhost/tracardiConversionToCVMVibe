@@ -1,0 +1,37 @@
+from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession, async_sessionmaker
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.pool import NullPool
+import redis.asyncio as redis
+from .config import settings
+
+# Create async engine
+engine = create_async_engine(
+    settings.database_url,
+    poolclass=NullPool,
+    echo=False,  # Set to True for SQL debugging
+)
+
+# Create async session factory
+AsyncSessionLocal = async_sessionmaker(
+    engine,
+    class_=AsyncSession,
+    expire_on_commit=False
+)
+
+# Create base class for models
+Base = declarative_base()
+
+# Redis connection
+redis_client = redis.from_url(settings.redis_url, decode_responses=True)
+
+# Dependency to get database session
+async def get_db():
+    async with AsyncSessionLocal() as session:
+        try:
+            yield session
+        finally:
+            await session.close()
+
+# Dependency to get Redis client
+async def get_redis():
+    return redis_client

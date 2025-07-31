@@ -1,162 +1,298 @@
-![github_banner](https://user-images.githubusercontent.com/16271564/148845983-7c9e85c1-465f-44ed-b1e9-7112908d2e83.png)
+# EngageHub - CVM Platform for Tmcel
 
-  <p align="center">
-   Customer data and engagement suite, an open-source alternative to Segment, RudderStack, etc.
-  </p>
+A Customer Value Management (CVM) platform built for Tmcel, leveraging the existing Tracardi CDP foundation.
 
-  <p align="center">
-   <br/>
-    <a href="https://manual.tracardi.com" rel="dofollow"><strong>Explore Tracardi Documentation</strong></a> ·
-    <a href="https://opencollective.com/tracardi-cdp">⭐️ Support the project</a> ·
-    <a href="https://join.slack.com/t/tracardi/shared_invite/zt-1bpf35skl-8Fr5FX5a6cji7tX18JNNDA">👨‍💻 Join the community</a> ·
-    <a href="https://youtube.com/@tracardi">:tv: Watch tutorials on YOUTUBE</a>
-   <br/>
-  </p>
-  
- <p align="center">
-  <a href="https://github.com/Tracardi/tracardi/">
-    <img alt="GitHub Repository Stars Count" src="https://img.shields.io/github/stars/Tracardi/tracardi?style=social" />
-  </a>
-    <a href="https://twitter.com/tracardi">
-        <img alt="Follow Us on Twitter" src="https://img.shields.io/twitter/follow/tracardi?style=social" />
-    </a>
-    <a href="https://www.youtube.com/channel/UC0atjYqW43MdqNiSJBvN__Q">
-        <img alt="Subscribe on our Youtube Channel" src="https://img.shields.io/youtube/channel/subscribers/UC0atjYqW43MdqNiSJBvN__Q?style=social" />
-    </a>
-    <a href="https://opencollective.com/tracardi-cdp">
-        <img alt="Subscribe on our Youtube Channel" src="https://opencollective.com/tracardi-cdp/tiers/badge.svg" />
-    </a>
-    <a href="https://join.slack.com/t/tracardi/shared_invite/zt-1bpf35skl-8Fr5FX5a6cji7tX18JNNDA">
-        <img alt="Subscribe on our Youtube Channel" src="https://img.shields.io/badge/slack-join_chat-white.svg?logo=slack&style=social" />
-    </a>
-</p>
+## 🎯 MVP Features
 
-# API-First Composable Open-source Customer Data Platform Engine
+### 1. **Unified Customer Data View**
+- Consolidated customer profiles from multiple data sources
+- Real-time customer 360° view with telco-specific metrics
+- Clean, normalized customer data with ARPU, usage patterns, and churn indicators
 
-[TRACARDI](http://www.tracardi.com/?utm_source=github&utm_medium=web) is a 🚀 powerful CDP engine designed to __help you build your own Customer Data Platform__. More than just a CDP, Tracardi is built with an exceptionally open architecture that gives you total control. With its __API-first approach__, you can seamlessly integrate and adapt Tracardi to fit your specific business requirements, allowing you to create a truly tailored solution.
+### 2. **AI-Powered Churn Prediction**
+- Machine learning model predicting customer churn probability
+- Risk scoring based on usage patterns, payment history, and engagement
+- Proactive identification of at-risk customers
 
-## ⭐️ Screenshots
+### 3. **Dynamic Customer Segmentation**
+- Visual segment builder with drag-and-drop interface
+- Real-time segment population counts
+- Telco-specific segments (prepaid/postpaid, data users, high-value customers)
 
-[![flow-1](https://user-images.githubusercontent.com/16271564/220199377-2b84168f-7e43-49ac-9560-998722589749.png)](https://youtu.be/JrzFAfyctKw)
+### 4. **No-Code Campaign Designer**
+- Intuitive campaign builder for SMS marketing
+- Template-based message creation
+- Audience targeting with segment integration
 
-## ✨ Features!
+### 5. **Automated Campaign Triggering**
+- Rule-based campaign automation
+- Scheduled campaign execution
+- Event-triggered campaigns (low balance, data expiry)
 
-### A Platform Build For Your
+### 6. **Real-Time Monitoring & Reporting**
+- Live dashboard with key CVM metrics
+- Campaign performance tracking
+- Customer behavior analytics and churn rate monitoring
 
-Tracardi provides the foundation for building an ideal Customer Data Platform that grows and evolves with your business. Its open, modular design means you can easily add new features, adapt existing components, and gain deep insights from your customer data, all while maintaining complete ownership.
+## 🏗️ Architecture
 
-What TRACARDI can do for you:
-
- * **Reuse Current Infrastructure** - Tracardi doesn’t require complex integration or dedicated infrastructure. It runs on top of cloud-managed services, reusing your existing infrastructure and spinning up new resources when needed.
-
- * **Collect Customer Data** - You can collect, ingest, aggregate, and store customer data from multiple sources in real time.
-   
- * **Model Customer Data** -  You can model data. Create rules that will model the data from your page and copy it into the user profile.
-   
- * **Personalize User Experience** - You can personalise the user experience with real-time frontend apps injected into your existing webpage, customised messages, marketing segmentation, and in-time messaging.
-   
- * **Unify Profiles** - You can merge customer data from various sources into a single profile. Automate the process of eliminating duplicate customer records. Blend customers into one account.
-   
- * **Integrate Internal Systems** - Tracardi is a centralised communication and orchestration hub that can integrate different parts of your IT.
-
- * **Scale E-commerce Easily** - Tracardi is a headless, API-first platform. Built with modern tools and designed as a decentralised system that can handle your needs.
-  
- * **Use Social Engagement** - Connect your e-commerce platform to existing social media networks using **Tracardi bridges**. Reward your customers for sharing your products or leaving comments on contents that helps you sell.
- 
- * **Stay open to all the tools available on the Internet** - Tracardi is open source. Do not limit your business to a closed set of tools. If there is any tool that will help you sell Tracardi, it will help you connect it with your business.
-
-   
-Want to see Tracardi in action? Subscribe to our [:tv: Youtube channel](https://bit.ly/3pbdbPR)!
-
-## 👇 Installation and getting started
-
-The easiest way to run TRACARDI is to run it as a :whale: **docker container**. 
-
-* Install docker and docker-compose on your local machine
-* Clone [tracardi/tracardi-api](https://github.com/Tracardi/tracardi-api.git) by executing the following line in your terminal.
-
-  ```bash
-  git clone https://github.com/Tracardi/tracardi-api.git:1.1.x
-  ```
-
-* Go to the `TRACARDI API` folder, and run the following command:
-
-```bash
-cd tracardi-api
-docker-compose up
+```
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│   Frontend      │    │    Backend      │    │   Database      │
+│   (React/TS)    │◄──►│   (FastAPI)     │◄──►│  (PostgreSQL)   │
+│   + Tailwind    │    │   + ML Models   │    │   + Redis       │
+└─────────────────┘    └─────────────────┘    └─────────────────┘
 ```
 
-* Visit the url `http://127.0.0.1:8787` and complete the installation in Tracardi GUI. 
+### Tech Stack
+- **Frontend**: React 18 + TypeScript + Tailwind CSS + Vite
+- **Backend**: Python 3.9+ + FastAPI + SQLAlchemy + Pydantic
+- **Database**: PostgreSQL 14+ + Redis (caching)
+- **ML**: scikit-learn + pandas + numpy
+- **Real-time**: WebSockets for live updates
 
-## 👇 Other Methods of Installation
+## 🚀 Quick Start
 
-There are other methods of installation available as well. These are described in detail in our [documentation](http://manual.tracardi.com/installation/).
+### 🐳 Docker Setup (Recommended for Windows)
 
-## 👇 Need help ?
+#### Prerequisites
+- Docker Desktop for Windows
+- 4GB+ RAM available for Docker
 
-<table align="center">
-<tr>
-<td align="center">Join our community</td>
-<td align="center">Visit our YouTube Channel</td>
-<td align="center">Tweet with us</td>
-</tr>
-<tr>
-<td  align="center"><a href="https://join.slack.com/t/tracardi/shared_invite/zt-10y7w0o9y-PmCBnK9qywchmd1~KIER2Q">
-    <img src="https://user-images.githubusercontent.com/16271564/151843970-5e869807-4ccf-46ab-98f5-6a65aea790f8.png" width="120px"/> 
-</a></td>
-<td  align="center"><a href="https://www.youtube.com/channel/UC0atjYqW43MdqNiSJBvN__Q">
-    <img src="https://user-images.githubusercontent.com/16271564/194526771-ab525c4f-b1fa-4d85-8834-340a40c8828b.png" width="120px"/> 
-</a></td>
- <td  align="center"><a href="https://www.twitter.com/tracardi">
-    <img src="https://user-images.githubusercontent.com/16271564/194528790-83d1bdbb-0446-4147-a572-4dc12cc0a70f.png" width="120px"/> 
-</a></td>
-<tr>
-</table>
+#### One-Click Launch
+```batch
+# Double-click or run from command prompt
+launch-engagehub.bat
+```
 
-## 👇 Documentation
+**That's it!** The script will:
+- ✅ Check Docker availability
+- 🏗️ Build all containers (first run only)
+- 🗄️ Setup PostgreSQL database
+- 📊 Generate 10,000+ demo customers
+- 🚀 Launch all services
+- 🌐 Open EngageHub in your browser
 
-* System documentation is available at: [http://manual.tracardi.com](http://manual.tracardi.com).
-* Api documentation is always available after installation at http://127.0.0.1:8686/docs.
-* Tracardi also has a built-in documentation into the system.
+#### Docker Management
+```batch
+# Stop all services
+stop-engagehub.bat
 
-## 👇 Call for Contributors
+# Reset all data and start fresh
+reset-engagehub.bat
 
-Have you found a bug :bug: ? Or maybe you have a nice feature :sparkles: to contribute? The
-[CONTRIBUTING guide](https://github.com/Tracardi/tracardi/blob/master/CONTRIBUTING.md) will help you get your
-development environment ready in minutes.
+# View logs
+docker-compose logs -f
 
-All contributors willing to start coding TRACARDI plugins are urged to read the following beginners' tutorial:
+# Manual commands
+docker-compose up -d      # Start services
+docker-compose down       # Stop services
+docker-compose down -v    # Stop and remove all data
+```
 
-* [How to code simple plugin in Tracardi](http://manual.tracardi.com/development/tutorial/plugin/)
+### 🛠️ Manual Setup (Development)
 
-## 👇 Support us
+#### Prerequisites
+- Python 3.9+
+- Node.js 18+
+- PostgreSQL 14+
+- Redis (optional, for caching)
 
-If you wish to support us, follow us on:
+#### Automated Setup
+```bash
+# Make setup script executable (Linux/Mac)
+chmod +x setup.sh
 
-* [Facebook](https://bit.ly/3uPwP5a) 
-* [X (Twitter)](https://bit.ly/3uVJwLJ), tag TRACARDI and leave your comments. 
-* Subscribe to our [Youtube channel](https://www.youtube.com/@tracardi) to see development process and new upcoming features. Don't forget to turn on the notifications by pressing the bell icon to stay updated about the latest updates and releases.
-* ⭐️ Star the TRACARDI GitHub project - it really matters and puts a smile on our faces.
+# Run setup script
+./setup.sh
+```
 
-We are grateful for any assistance that contributes to the popularity of TRACARDI.
+#### Manual Setup Steps
 
-## 👇 Donate
+##### 1. Database Setup
+```bash
+# Create PostgreSQL database
+createdb cvm_tmcel
 
-You can support us on [Open Collective](https://www.opencollective.com/tracardi-cdp)
+# Run database initialization
+psql -d cvm_tmcel -f db/init.sql
+```
 
-## 👇 Referral programs
+##### 2. Backend Setup
+```bash
+cd backend
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+pip install -r requirements.txt
 
-You can support us via referral programs by purchasing a service from the following link(s)
+# Generate mock data
+python generate_mock_data.py
 
-[![DigitalOcean Referral Badge](https://web-platforms.sfo2.digitaloceanspaces.com/WWW/Badge%203.svg)](https://www.digitalocean.com/?refcode=882eb4bf23be&utm_campaign=Referral_Invite&utm_medium=Referral_Program&utm_source=badge)
+# Start the server
+uvicorn main:app --reload --port 8000
+```
 
-## 👇 License
+##### 3. Frontend Setup
+```bash
+cd frontend
+npm install
+npm run dev
+```
 
-TRACARDI is available under [MIT with Common Clause](https://github.com/Tracardi/tracardi/blob/master/LICENSE.md) license.
+### 🌐 Access Points
 
-## 👇 Recent activities
+| Service | URL | Description |
+|---------|-----|-------------|
+| **EngageHub Frontend** | http://localhost:2020 | Main application interface |
+| **Backend API** | http://localhost:3030 | REST API endpoints |
+| **API Documentation** | http://localhost:3030/docs | Interactive API docs |
+| **Database** | localhost:5432 | PostgreSQL database |
+| **Redis Cache** | localhost:6379 | Redis cache server |
 
-[![Stargazers repo roster for @tracardi/tracardi](https://reporoster.com/stars/tracardi/tracardi)](https://github.com/tracardi/tracardi/stargazers)
+### 🔐 Demo Credentials
+- **Username**: `admin`
+- **Password**: `admin`
 
-[![Forkers repo roster for @tracardi/tracardi](https://reporoster.com/forks/tracardi/tracardi)](https://github.com/tracardi/tracardi/network/members)
+## 📊 Demo Data
 
+The system includes comprehensive mock data representing:
+- **10,000 customers** with realistic telco profiles
+- **50,000 events** (recharges, data usage, calls)
+- **Campaign history** with performance metrics
+- **Churn predictions** based on behavioral patterns
+
+### Sample Customer Segments
+- **High-Value Customers**: ARPU > 1000 MZN
+- **At-Risk Customers**: Churn score > 0.7
+- **Data Heavy Users**: >5GB monthly usage
+- **Prepaid Low Balance**: Balance < 50 MZN
+- **New Customers**: Activated in last 30 days
+
+## 🎨 UI/UX Highlights
+
+### Dashboard
+- Clean, executive-friendly interface
+- Real-time KPI widgets
+- Interactive charts and graphs
+- Mobile-responsive design
+
+### Campaign Builder
+- Drag-and-drop campaign flow
+- Visual segment selection
+- Message template library
+- A/B testing setup (mocked)
+
+### Customer 360°
+- Comprehensive customer profiles
+- Interaction history timeline
+- Predictive insights
+- Segment membership
+
+## 📈 Key Metrics Tracked
+
+### Business KPIs
+- **Customer Churn Rate**: Monthly churn percentage
+- **ARPU**: Average Revenue Per User
+- **Customer Lifetime Value**: Predicted CLV
+- **Campaign ROI**: Revenue generated vs. cost
+
+### Operational Metrics
+- **Segment Population**: Real-time segment sizes
+- **Campaign Performance**: Open rates, conversion rates
+- **System Health**: API response times, data freshness
+
+## 🔧 Configuration
+
+### Environment Variables
+```bash
+# Database
+DATABASE_URL=postgresql://user:password@localhost/cvm_tmcel
+REDIS_URL=redis://localhost:6379
+
+# ML Models
+CHURN_MODEL_PATH=./models/churn_model.pkl
+NBO_MODEL_PATH=./models/nbo_model.pkl
+
+# Campaign Settings
+SMS_GATEWAY_URL=https://api.sms-gateway.com
+SMS_API_KEY=your_api_key_here
+
+# Feature Flags
+ENABLE_REAL_SMS=false
+ENABLE_ML_PREDICTIONS=true
+```
+
+## 🧪 Testing
+
+### Backend Tests
+```bash
+cd backend
+pytest tests/ -v
+```
+
+### Frontend Tests
+```bash
+cd frontend
+npm test
+```
+
+## 📁 Project Structure
+
+```
+cvm-tmcel-mvp/
+├── frontend/                 # React TypeScript frontend
+│   ├── src/
+│   │   ├── components/      # Reusable UI components
+│   │   ├── pages/          # Main application pages
+│   │   ├── hooks/          # Custom React hooks
+│   │   ├── services/       # API service layer
+│   │   └── types/          # TypeScript type definitions
+│   ├── public/             # Static assets
+│   └── package.json
+├── backend/                  # FastAPI Python backend
+│   ├── app/
+│   │   ├── api/            # API route handlers
+│   │   ├── core/           # Core business logic
+│   │   ├── models/         # Database models
+│   │   ├── schemas/        # Pydantic schemas
+│   │   └── services/       # Business services
+│   ├── ml_models/          # Machine learning models
+│   └── requirements.txt
+├── db/                      # Database scripts and migrations
+│   ├── init.sql            # Database initialization
+│   └── seed_data.sql       # Mock data insertion
+├── docs/                    # Documentation
+│   ├── CDP_Analysis.md     # Analysis of existing CDP
+│   └── architecture.md     # System architecture
+└── README.md               # This file
+```
+
+## 🎯 Next Steps (Post-MVP)
+
+### Phase 2 Enhancements
+1. **Advanced ML Models**: Deep learning for better predictions
+2. **Multi-channel Campaigns**: Email, push notifications, USSD
+3. **Real-time Personalization**: Dynamic offer optimization
+4. **Advanced Analytics**: Cohort analysis, customer journey mapping
+
+### Phase 3 Production
+1. **Scalability**: Kubernetes deployment, load balancing
+2. **Security**: OAuth2, role-based access control
+3. **Integration**: Real Tmcel systems integration
+4. **Monitoring**: Comprehensive logging and alerting
+
+## 🤝 Contributing
+
+This is a prototype for board presentation. For production development:
+1. Follow the existing code patterns
+2. Add comprehensive tests
+3. Update documentation
+4. Consider security implications
+
+## 📄 License
+
+Proprietary - Tmcel Internal Use Only
+
+---
+
+**Built for Tmcel Board Presentation** | **Powered by Tracardi CDP Foundation**

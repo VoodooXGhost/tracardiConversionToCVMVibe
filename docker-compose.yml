@@ -1,0 +1,114 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: engagehub-postgres
+    environment:
+      POSTGRES_DB: engagehub_cvm
+      POSTGRES_USER: engagehub
+      POSTGRES_PASSWORD: engagehub2024
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U engagehub -d engagehub_cvm"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - engagehub-network
+
+  # Redis Cache
+  redis:
+    image: redis:7-alpine
+    container_name: engagehub-redis
+    command: redis-server --appendonly yes
+    volumes:
+      - redis_data:/data
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+    networks:
+      - engagehub-network
+
+  # Backend API
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    container_name: engagehub-backend
+    environment:
+      - DATABASE_URL=postgresql://engagehub:engagehub2024@postgres:5432/engagehub_cvm
+      - REDIS_URL=redis://redis:6379
+      - SECRET_KEY=engagehub-secret-key-change-in-production
+      - ALGORITHM=HS256
+      - ACCESS_TOKEN_EXPIRE_MINUTES=30
+      - ENABLE_ML_PREDICTIONS=true
+      - ENABLE_REAL_SMS=false
+    ports:
+      - "3030:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    volumes:
+      - ./backend:/app
+      - backend_models:/app/ml_models
+    networks:
+      - engagehub-network
+    restart: unless-stopped
+
+  # Frontend
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    container_name: engagehub-frontend
+    ports:
+      - "2020:80"
+    depends_on:
+      - backend
+    networks:
+      - engagehub-network
+    restart: unless-stopped
+
+  # Data Generator (runs once to populate database)
+  data-generator:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    container_name: engagehub-data-generator
+    environment:
+      - DATABASE_URL=postgresql://engagehub:engagehub2024@postgres:5432/engagehub_cvm
+      - REDIS_URL=redis://redis:6379
+    command: python generate_mock_data.py
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - ./backend:/app
+    networks:
+      - engagehub-network
+    profiles:
+      - setup
+
+volumes:
+  postgres_data:
+    driver: local
+  redis_data:
+    driver: local
+  backend_models:
+    driver: local
+
+networks:
+  engagehub-network:
+    driver: bridge
